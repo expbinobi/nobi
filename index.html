@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <base target="_blank">
+    <style>
+      :root {
+        --primary: #2563eb;
+        --secondary: #f8fafc;
+        --text: #2a2a2a;
+        --background: #ffffff;
+        --border: #e5e7eb;
+      }
+
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        line-height: 1.5;
+        color: var(--text);
+        background: var(--background);
+        padding: 1rem;
+        max-width: 800px;
+        margin: 0 auto;
+        font-size: 18px; /* Increased base font size from 16px */
+      }
+
+      .group-container {
+        background: var(--secondary);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--border);
+      }
+
+      .group-title {
+        font-size: 1.3rem; /* Increased from 1.1rem */
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 0px solid var(--border);
+      }
+
+      .link-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .link-item {
+        display: block;
+        padding: 0.75rem 1rem; /* Increased padding */
+        background: white;
+        text-decoration: none;
+        color: var(--text);
+        border-radius: 4px;
+        border: 1px solid var(--border);
+        font-size: 1.05rem; /* Increased from 0.9rem */
+        transition: all 0.2s ease;
+      }
+
+      .link-item:hover {
+        background: var(--secondary);
+        border-color: var(--primary);
+      }
+
+      .user-id {
+        text-align: center;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        font-weight: 400;
+        color: var(--primary);
+        font-size: 1.1rem; /* Added explicit font size */
+      }
+
+      .single-link-container {
+        background: var(--secondary);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--border);
+      }
+
+      .single-link {
+        display: block;
+        padding: 0.75rem 1rem;
+        background: white;
+        text-decoration: none;
+        color: var(--text);
+        border-radius: 4px;
+        border: 1px solid var(--border);
+        font-size: 1.05rem; /* Increased from 0.9rem */
+        transition: all 0.2s ease;
+        text-align: left;
+      }
+
+      .single-link:hover {
+        background: var(--secondary);
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+
+      .link-item.clicked {
+        background: #e6ffe6;
+        border-color: #4CAF50;
+        color: #2a2a2a;
+      }
+
+      .single-link.clicked {
+        background: #e6ffe6;
+        border-color: #4CAF50;
+        color: #2a2a2a;
+      }
+
+      /* Add this meta tag to your HTML head for proper mobile rendering */
+      /* <meta name="viewport" content="width=device-width, initial-scale=1.0"> */
+
+      /* Mobile-specific adjustments */
+      @media (max-width: 480px) {
+        body {
+          font-size: 17px; /* Slightly smaller than desktop but still larger than original */
+          padding: 0.75rem;
+        }
+        
+        .group-title {
+          font-size: 1.2rem;
+        }
+        
+        .user-id {
+          font-size: 1rem;
+        }
+        
+        .link-item, .single-link {
+          font-size: 1rem;
+          padding: 0.75rem;
+        }
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div id="groupsContainer"></div>
+    
+    <script>
+        function getRandomLinksGroup1() {
+    const links = [
+      {url: "https://docs.google.com/forms/d/e/1FAIpQLSc89r_80UM26CLq9u1xmijWhMgP_patUOJDatsEWIZY929JJw/viewform?usp=header", title: "Sistema ciano"},
+      {url: "https://docs.google.com/forms/d/e/1FAIpQLSeI9duEZiE_HZaNzgD7C-fnD71GoCEkyts8MlTZ60W5CZACdA/viewform?usp=header", title: "Sistema giallo"},
+      {url: "https://docs.google.com/forms/d/e/1FAIpQLSeeowE7EplqrnBN_y_KbLQ-6Qbkic_IYYYfMfQ07mT1jJ18qg/viewform?usp=header", title: "Sistema verde acqua"},
+      {url: "https://docs.google.com/forms/d/e/1FAIpQLSc1ao5eamUKpmOOhN5k9h3PqKe48lpT8h-qR9RP5koCm-Xdyg/viewform?usp=header", title: "Sistema verde"},
+      {url: "https://docs.google.com/forms/d/e/1FAIpQLSdpiGfKSMTatELqkbpFWUWafmTPssBMg18doghK9wETYdRSqQ/viewform?usp=header", title: "Sistema grigio scuro"},
+      {url: "https://docs.google.com/forms/d/e/1FAIpQLSeRmxfETeieTbnDhOi-m4cVfmHb4qWgIr_Q9j4Vv2mUTgm-dw/viewform?usp=header", title: "Sistema grigio"}
+    ];
+    
+    return links.sort(() => Math.random() - 0.5);
+  }
+
+       
+      function generateUserId(length = 6) {
+    //const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const characters = '0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+    }
+
+      // Create and insert user ID element
+      const userIdElement = document.createElement('h3');
+      userIdElement.className = 'user-id';
+      userIdElement.textContent = `Ciao! Per partecipare al test, ti chiederemo di compilare alcuni brevi questionari. All'interno di ogni questionario dovrai inserire il seguente ID: ${generateUserId()}`;
+      document.body.insertBefore(userIdElement, document.getElementById('groupsContainer'));
+
+
+      const descriptionFirst = document.createElement('h3');
+      descriptionFirst.className = 'user-id';
+      descriptionFirst.textContent = `Ti chiediamo di cliccare sul seguente link per leggere le istruzioni e compilare il primo questionario:`;
+      document.body.insertBefore(descriptionFirst,document.getElementById('groupsContainer'));
+
+      // Create and insert single link container
+      const singleLinkContainer = document.createElement('div');
+      singleLinkContainer.className = 'single-link-container';
+
+      const singleLink = document.createElement('a');
+      singleLink.href = 'https://docs.google.com/forms/d/e/1FAIpQLSc0Jiash_rU1kxol9c9pNKkeYXKCuaxBXtK9eyXHB6iH58-9g/viewform?usp=header';
+      singleLink.className = 'single-link';
+      singleLink.textContent = 'Questionario iniziale';
+      singleLink.target = '_blank';
+      singleLink.addEventListener('click', function() {
+          this.classList.add('clicked');
+          // Store clicked state in localStorage
+          localStorage.setItem(this.href, 'clicked');
+      });
+
+      // Check if link was previously clicked
+      if (localStorage.getItem(singleLink.href) === 'clicked') {
+          singleLink.classList.add('clicked');
+      }
+
+      singleLinkContainer.appendChild(singleLink);
+      document.body.insertBefore(singleLinkContainer, document.getElementById('groupsContainer'));
+
+      const descriptionGroups = document.createElement('h3');
+      descriptionGroups.className = 'user-id';
+      descriptionGroups.textContent = `Ti chiediamo di cliccare sui seguenti link e compilare i questionari nell'ordine in cui vengono presentati:`;
+      document.body.insertBefore(descriptionGroups,document.getElementById('groupsContainer'));
+
+
+      function createGroup(groupNum) {
+        const groupDiv = document.createElement('div');
+        groupDiv.className = 'group-container';
+        groupDiv.id = generateUserId(); // Add random ID here
+        
+        const title = document.createElement('h2');
+        title.className = 'group-title';
+        title.textContent ='';
+        //title.textContent = `Ti chiediamo di cliccare sui seguenti link e compilare i questionari nell'ordine in cui vengono presentati: ${groupNum}`;
+        
+        const linkContainer = document.createElement('div');
+        linkContainer.className = 'link-container';
+        linkContainer.id = `linkList${groupNum}`;
+        
+        groupDiv.appendChild(title);
+        groupDiv.appendChild(linkContainer);
+        return groupDiv;
+      }
+
+      const container = document.getElementById('groupsContainer');
+      const groups = [createGroup(1)];
+      if (Math.random() < 0.5) {
+        groups.reverse();
+      }
+      groups.forEach(group => container.appendChild(group));
+      
+      const links1 = getRandomLinksGroup1();
+      displayLinks(links1, 'linkList1');
+            
+      function displayLinks(links, containerId) {
+        const container = document.getElementById(containerId);
+        links.forEach(link => {
+            const a = document.createElement('a');
+            a.href = link.url;
+            a.textContent = link.title;
+            a.className = 'link-item';
+            
+            // Add click event listener
+            a.addEventListener('click', function() {
+                this.classList.add('clicked');
+                // Store clicked state in localStorage
+                localStorage.setItem(this.href, 'clicked');
+            });
+            
+            // Check if link was previously clicked
+            if (localStorage.getItem(link.url) === 'clicked') {
+                a.classList.add('clicked');
+            }
+            
+            container.appendChild(a);
+        });
+    }
+    </script>
+  </body>
+</html>
