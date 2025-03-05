@@ -182,7 +182,7 @@
 
       const descriptionFirst = document.createElement('h3');
       descriptionFirst.className = 'user-id';
-      descriptionFirst.textContent = `Ti chiediamo di cliccare sul seguente link per leggere le istruzioni e compilare il primo questionario:`;
+      descriptionFirst.textContent = `Ti chiediamo di cliccare sul seguente link per leggere le istruzioni e compilare il primo questionario. Dopo averlo compilato, torna a questa pagina per proseguire:`;
       document.body.insertBefore(descriptionFirst,document.getElementById('groupsContainer'));
 
       // Create and insert single link container
@@ -207,6 +207,30 @@
 
       singleLinkContainer.appendChild(singleLink);
       document.body.insertBefore(singleLinkContainer, document.getElementById('groupsContainer'));
+
+            // Aggiungi il nuovo paragrafo con la descrizione dello scenario
+      const scenarioDescription = document.createElement('p');
+      scenarioDescription.className = 'user-id'; // Riutilizzo dello stile esistente
+      scenarioDescription.style.textAlign = 'left'; // Allineamento a sinistra per il testo più lungo
+      scenarioDescription.style.marginBottom = '1rem';
+      scenarioDescription.innerHTML = "Sei un turista che sta pianificando di visitare Valgrisa. Ti interessano soprattutto la cultura e le esperienze enogastronomiche. Ti piacerebbe ricevere dei suggerimenti per completare il tuo itinerario. <strong>Nota che il paese di Valgrisa è inventato ai fini della sperimentazione</strong>. </br></br> <strong>Scorri giù per compilare i diversi questionari.</strong>";
+      document.body.insertBefore(scenarioDescription, document.getElementById('groupsContainer'));
+
+      // Aggiungi l'immagine
+      const imageContainer = document.createElement('div');
+      imageContainer.style.textAlign = 'center';
+      imageContainer.style.marginBottom = '1.5rem';
+
+      const image = document.createElement('img');
+      image.src = "img.jpg"; // Sostituisci con l'URL effettivo dell'immagine
+      image.alt = "Valgrisa";
+      image.style.maxWidth = "80%";
+      image.style.borderRadius = "8px";
+      image.style.border = "1px solid var(--border)";
+
+      imageContainer.appendChild(image);
+      document.body.insertBefore(imageContainer, document.getElementById('groupsContainer'));
+
 
       const descriptionGroups = document.createElement('h3');
       descriptionGroups.className = 'user-id';
